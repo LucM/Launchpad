@@ -1,0 +1,86 @@
+<!-- Left part, form to search a new video, and the list videos returned after a search  -->
+<div id="searchView">
+	<!-- Search Form-->
+	<div id="searchForm" class="form-inline">
+		<form ng-submit="searchYoutubeVideo();">
+		<input type="text" ng-model="search" />
+		<input type="submit" class="btn" value="Search" />
+		</form>
+	</div>
+	<!-- Results -->
+	<div id="searchResults">
+		<ul>
+			<!-- Lists of videos found -->
+			<li ng-repeat="video in results">
+				<div class="row-fluid">
+					<div class="span3">
+						<img ng-src="{{video.snippet.thumbnails.medium.url}}" />
+					</div>
+					<div class="span6">{{video.snippet.title}}</div>
+					<div class="span3">
+						<button class="btn" ng-click="setVideo(video.id.videoId)">Select
+							this video</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- Video selected, and the form to cut it and create a new sample -->
+<div id="videoSelected">
+	<!-- Video Player -->
+	<div class="row-fluid">
+		<div class="span12">
+			<div id="playerWrapper">
+				<div id="videoSelectedWrapper"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Player controller -->
+	<div class="row-fluid">
+		<div class="span12">
+			<div ng-show="videoSelectedBoolean" class="playerController">
+				<div class="input-append input-prepend">
+					<button class="btn" type="button" ng-click="ytplayer.seekTo(0); ytplayer.playVideo();">Restart</button>	
+					<button class="btn" type="button" ng-click="ytplayer.playVideo();">Play</button>
+					<button class="btn" type="button" ng-click="ytplayer.pauseVideo();">Pause</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Sample form -->
+	<div class="row-fluid">
+		<div ng-show="videoSelectedBoolean" class="playerController">
+			<div class="span12">
+				<div class="form-inline">
+					<button class="btn" type="button" ng-click="start = ytplayer.getCurrentTime();">Set start time</button>
+					: <input type="text" ng-model="start">
+				</div>
+				<br>
+				<div class="form-inline">
+					<button class="btn" type="button" ng-click="end = ytplayer.getCurrentTime();">Set end time</button>
+					: <input type="text" ng-model="end">
+				</div>
+				<br>
+				<div class="form-inline">
+					<button class="btn" type="button" ng-click="ytplayer.seekTo(start); ytplayer.playVideo();">Clip Preview</button>
+					Repeat: <input type="checkbox" ng-model="repeat"> 
+				</div>
+				<br>
+				<div class="form-inline">
+					Character to control the video: <input type="text" class="span1" id="char" ng-model="controlChar">
+				</div>
+				<br>
+				<div class="form-inline">
+					Title: <input type="text" class="span5" ng-model="title">
+				</div>
+				<br>
+				<div class="form-inline">
+					<button class="btn" type="button" ng-click="submitSample();">Submit Sample</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

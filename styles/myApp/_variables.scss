@@ -1,0 +1,15 @@
+// Sample Vignette
+$sampleWidth: 200px;
+$sampleHeight: 200px;
+$sampleTitleHeight: 20px;
+$searchWidth: 300px;
+
+
+// border radius color ..
+@mixin blockStyle {
+	background: #fff;
+	border-radius: 2px;
+	border: 1px solid #aaa;
+	border-bottom-width: 2px;
+	
+}
